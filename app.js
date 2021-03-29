@@ -57,7 +57,8 @@ app.post("/api/storescore/:boardid/", function (req, res) {
     userName,
     function (err, reply) {
       if (err) throw err;
-      res.send(reply > 0 ? "Başarıyla eklendi." : "Eklenemedi");
+      if (reply > 0) res.send("Başarıyla eklendi.");
+      else res.status(400).send("Eklenemedi");
     }
   );
 });
