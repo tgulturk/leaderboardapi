@@ -33,8 +33,9 @@ app.param("boardid", function (req, res, next, boardid) {
 
   client.lrange(req.query["api-key"], 0, -1, function (err, reply) {
     if (!reply)
-      return next(error(400, "API key ile ilişkili board bulunamadı"));
-    if (!~reply.indexOf(boardid)) next(error(400, "Bu boarda erişiminiz yok."));
+      return next(error(400, "API KEY have no memory of this board."));
+    if (!~reply.indexOf(boardid))
+      next(error(400, "You cant take anything from this board."));
   });
 
   next();
@@ -57,8 +58,8 @@ app.post("/api/storescore/:boardid/", function (req, res) {
     userName,
     function (err, reply) {
       if (err) throw err;
-      if (reply > 0) res.send("Başarıyla eklendi.");
-      else res.status(400).send("Eklenemedi");
+      if (reply > 0) res.send("Score added succesfully.");
+      else res.status(400).send("Score adde'nt miserably.");
     }
   );
 });
