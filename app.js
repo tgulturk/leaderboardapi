@@ -5,11 +5,7 @@ const port = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var client = redis.createClient({
-  host: "eu1-poetic-foal-31430.upstash.io",
-  port: "31430",
-  password: "421e104b21a54ebf8cc89476538104e2",
-});
+var client = redis.createClient(require("./config.json"));
 
 client.on("error", function (err) {
   throw err;
